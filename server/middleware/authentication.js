@@ -20,10 +20,9 @@ let tokenVerify = (req, res, next) => {
 */
 let verificaAdmin_Role = (req, res, next) => {
 
-    let user = req.user;
-    console.log(user)
+    let usuario = jwt.decode(req.get('token'));
 
-    if (usuario.role === 'ADMIN_ROLE') {
+    if (usuario.DBUserFoundSuccessfully.role === 'ADMIN_ROLE') {
         next();
     } else {
 
@@ -35,10 +34,6 @@ let verificaAdmin_Role = (req, res, next) => {
         });
     }
 };
-
-
-
-
 
 module.exports = {
     tokenVerify,

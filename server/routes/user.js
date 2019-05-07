@@ -26,7 +26,6 @@ app.get('/usuario', tokenVerify, (req, res) => {
 });
 
 
-
 app.post('/usuario', [tokenVerify, verificaAdmin_Role], (req, res) => {
     let body = req.body;
 
@@ -48,7 +47,7 @@ app.post('/usuario', [tokenVerify, verificaAdmin_Role], (req, res) => {
 
 
 
-app.put('/usuario/:id', [tokenVerify, verificaAdmin_Role], (req, res) => {
+app.put('/usuario/:id', [tokenVerify, /*verificaAdmin_Role*/ ], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'state']);
 
@@ -63,7 +62,7 @@ app.put('/usuario/:id', [tokenVerify, verificaAdmin_Role], (req, res) => {
 
 
 
-app.delete('/usuario/:id', [tokenVerify, verificaAdmin_Role], (req, res) => {
+app.delete('/usuario/:id', [tokenVerify, /*verificaAdmin_Role*/ ], (req, res) => {
     let id = req.params.id;
 
     let stateChanged = { state: false };
