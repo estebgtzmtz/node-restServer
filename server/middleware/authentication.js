@@ -10,6 +10,7 @@ let tokenVerify = (req, res, next) => {
         if (err) {
             return res.status(401).json({ ok: false, err })
         }
+
         req.user = decoded.user;
         next();
     })
@@ -18,7 +19,7 @@ let tokenVerify = (req, res, next) => {
 /*
     VERIFICA ADMIN_ROLE
 */
-let verificaAdmin_Role = (req, res, next) => {
+let adminRoleVerify = (req, res, next) => {
 
     let usuario = jwt.decode(req.get('token'));
 
@@ -26,16 +27,11 @@ let verificaAdmin_Role = (req, res, next) => {
         next();
     } else {
 
-        return res.json({
-            ok: false,
-            err: {
-                message: 'El usuario no es administrador'
-            }
-        });
+        return res.json({ ok: false, err: { message: 'User is not an administrator' } });
     }
 };
 
 module.exports = {
     tokenVerify,
-    verificaAdmin_Role
+    adminRoleVerify
 }
