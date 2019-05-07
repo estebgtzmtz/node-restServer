@@ -2,10 +2,11 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
 const User = require('../models/user');
+const { tokenVerify, verificaAdmin_Role } = require('../middleware/authentication');
 
 const app = express();
 
-app.get('/usuario', (req, res) => {
+app.get('/usuario', tokenVerify, (req, res) => {
     let from = req.query.from || 0;
     from = Number(from);
 
@@ -26,7 +27,7 @@ app.get('/usuario', (req, res) => {
 
 
 
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [tokenVerify, verificaAdmin_Role], (req, res) => {
     let body = req.body;
 
     let user = new User({
@@ -47,7 +48,7 @@ app.post('/usuario', (req, res) => {
 
 
 
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id', [tokenVerify, verificaAdmin_Role], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'state']);
 
@@ -62,7 +63,7 @@ app.put('/usuario/:id', (req, res) => {
 
 
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [tokenVerify, verificaAdmin_Role], (req, res) => {
     let id = req.params.id;
 
     let stateChanged = { state: false };
@@ -86,7 +87,7 @@ app.delete('/usuario/:id', (req, res) => {
     let id = req.params.id;
 
     User.findByIdAndRemove(id, (err, deletedUserSuccessfully) => {
-        if(err){
+        if(err){https://www.facebook.com/1642446905771353/posts/2784995421516490/
             return res.status(400).json({ok:false, err});
         }
 
