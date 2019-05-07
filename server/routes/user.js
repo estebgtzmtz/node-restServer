@@ -13,7 +13,7 @@ app.get('/usuario', tokenVerify, (req, res) => {
     let to = req.query.to || 5;
     to = Number(to);
 
-    User.find({ state: true }, 'name email state google').skip(from).limit(to)
+    User.find({ state: true }, 'name email state google role').skip(from).limit(to)
         .exec((err, users) => {
             if (err) {
                 return res.status(400).json({ ok: false, err });
