@@ -26,7 +26,7 @@ app.post('/category', tokenVerify, (req, res) => {
         }
 
         res.json({ ok: true, DBCategory });
-    })
+    });
 });
 
 app.get('/category', tokenVerify, (req, res) => {
@@ -65,6 +65,7 @@ app.put('/category/:id', tokenVerify, (req, res) => {
     let body = req.body;
 
     let categoryUpdate = { description: body.description }
+
     Category.findByIdAndUpdate(id, categoryUpdate, { new: true, runValidators: true }, (err, DBCategory) => {
         if (err) {
             return res.status(500).json({ ok: false, err });

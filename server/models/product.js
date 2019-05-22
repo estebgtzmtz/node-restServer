@@ -1,10 +1,11 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var productSchema = new Schema({
+const productSchema = new Schema({
     name: {
         type: String,
-        required: [true, 'Name must be provided']
+        required: [true, 'Name must be provided'],
+        unique: true
     },
     unitPrice: {
         type: Number,
