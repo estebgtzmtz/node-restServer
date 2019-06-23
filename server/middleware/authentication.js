@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-
 /*
     VERIFICAR TOKEN
 */
@@ -20,13 +19,11 @@ let tokenVerify = (req, res, next) => {
     VERIFICA ADMIN_ROLE
 */
 let adminRoleVerify = (req, res, next) => {
-
     let usuario = jwt.decode(req.get('token'));
 
     if (usuario.DBUserFoundSuccessfully.role === 'ADMIN_ROLE') {
         next();
     } else {
-
         return res.json({ ok: false, err: { message: 'User is not an administrator' } });
     }
 };
