@@ -1,14 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { imgTokenVerify } = require('../middleware/authentication');
 
 const app = express();
 
-app.get('/image/:folder/:img', (req, res) => {
+app.get('/image/:folder/:img', imgTokenVerify, (req, res) => {
     let folder = req.params.folder;
     let image = req.params.img;
 
-    let imgPath = `./uploads/${folder}/${image}`;
+    let imgPath = path.resolve(__dirname, `../../uploads/${folder}/${image}`);
 
     if (fs.existsSync(imgPath)) {
         res.sendFile(imgPath);
