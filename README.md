@@ -2,7 +2,7 @@
 Create a full API REST
 
 ### It use:
-Token Verification
-Middlewares
-Bcrypt 
-Images Upload
+Token-Verification,
+Middlewares,
+Bcrypt, 
+Images-Upload
